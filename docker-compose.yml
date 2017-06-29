@@ -1,0 +1,30 @@
+version: "2"
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile-node
+    image: appserver
+    restart: always
+    ports:
+      - "8004:5004"
+    volumes:
+      - /opt/app/node_modules
+    environment:
+      - DB_HOST=localhost
+      - DB_NAME=hellodb
+      - DB_USER=hellouser
+      - DB_PASSWORD=
+      - IP_ADDRESS=0.0.0.0
+      - PORT=5004
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    image: nginx
+    restart: always
+    ports:
+    - "8003:80"
+    command: /bin/bash -c "nginx -g 'daemon off;'"
+    depends_on:
+      - server
