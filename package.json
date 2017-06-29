@@ -1,0 +1,63 @@
+{
+  "name": "random-koa-api",
+  "description": "Random Koa2 API",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "scripts": {
+    "start": "concurrently 'npm run run:dev' 'npm run lint:watch'",
+    "run:dev": "nodemon -w src -x ts-node src/index.ts",
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "lint": "tslint --type-check -p tsconfig.json -c ./tslint.json 'src/**/*.ts' 'test/**/*.ts'",
+    "lint:watch": "watch 'npm run lint -- --force' ./src ./test -du --wait=0.2",
+    "pretest": "rm -fr ./build && tsc || exit 0",
+    "test": "NODE_PATH=./build NODE_ENV=test istanbul cover -x 'build/config/config.js' _mocha -- build/test",
+    "posttest": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100"
+  },
+  "devDependencies": {
+    "@types/bookshelf": "^0.9.1",
+    "@types/chai": "^4.0.1",
+    "@types/chai-as-promised": "^0.0.31",
+    "@types/convict": "^4.0.0",
+    "@types/knex": "0.0.55",
+    "@types/koa-bodyparser": "^3.0.23",
+    "@types/koa-router": "^7.0.22",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^8.0.4",
+    "@types/ramda": "0.24.0",
+    "@types/supertest-as-promised": "^2.0.34",
+    "@types/uuid": "^3.0.0",
+    "@types/winston": "^2.3.2",
+    "chai": "^4.0.1",
+    "chai-as-promised": "^7.0.0",
+    "concurrently": "^3.4.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.4.1",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0",
+    "supertest-as-promised": "^4.0.2",
+    "ts-node": "^3.0.4",
+    "tslint": "^5.3.2",
+    "tslint-eslint-rules": "^4.1.0",
+    "tslint-immutable": "^4.0.1",
+    "typescript": "^2.3.3",
+    "uuid": "^3.1.0",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "bookshelf": "^0.10.3",
+    "convict": "^4.0.0",
+    "knex": "^0.12.9",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.0",
+    "moment": "^2.18.1",
+    "pg": "^6.2.2",
+    "ramda": "^0.24.1",
+    "uuid": "^3.1.0",
+    "winston": "^2.3.1"
+  }
+}

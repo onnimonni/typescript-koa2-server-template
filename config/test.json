@@ -1,0 +1,15 @@
+{
+  "logger": {
+    "level": "error"
+  },
+  "database": {
+    "connection": {
+      "host": "localhost",
+      "database": "testdb"
+    },
+    "pool": {
+      "min": 1,
+      "max": 1
+    }
+  }
+}

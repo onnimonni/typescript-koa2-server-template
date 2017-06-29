@@ -1,0 +1,18 @@
+FROM node:latest
+
+ENV APP_PATH /opt/app/server
+
+RUN mkdir -p $APP_PATH
+WORKDIR $APP_PATH
+
+COPY server $APP_PATH
+
+RUN rm -fr node_modules
+
+RUN npm set progress=false && npm install
+
+RUN npm run build
+
+RUN npm prune --production
+
+CMD NODE_ENV=production node build/src/index.js
